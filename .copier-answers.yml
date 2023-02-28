@@ -1,0 +1,6 @@
+# Changes here will be overwritten by Copier
+_src_path: ../copier-djangoapp
+port: 8091
+project_name: sso-django-prototype
+repository: https://github.com/mitodl/sso-django-prototype
+web_port: 8092
