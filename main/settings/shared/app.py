@@ -394,22 +394,4 @@ SOCIAL_AUTH_ODL_OIDC_SECRET = get_string(
     default=None,
     description="The client secret provided by the OpenID Connect provider.",
 )
-
-USERINFO_URL = get_string(
-    name="USERINFO_URL",
-    default=None,
-    description="Provder endpoint where client sends requests for identity claims.",
-)
-
-ACCESS_TOKEN_URL = get_string(
-    name="ACCESS_TOKEN_URL",
-    default=None,
-    description="Provider endpoint where client exchanges the authorization code for tokens.",
-)
-
-AUTHORIZATION_URL = get_string(
-    name="AUTHORIZATION_URL",
-    default=None,
-    description="Provider endpoint where the user is asked to authenticate.",
-)
 # Social Auth configurations - [END]
