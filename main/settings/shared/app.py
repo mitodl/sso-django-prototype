@@ -347,7 +347,7 @@ SOCIAL_AUTH_AUTHENTICATION_BACKENDS = (
 )
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = "/"
 SOCIAL_AUTH_LOGIN_URL = "/signin"
-SOCIAL_AUTH_LOGIN_ERROR_URL = "/signin"
+SOCIAL_AUTH_LOGIN_ERROR_URL = "/error"
 SOCIAL_AUTH_LOGOUT_REDIRECT_URL = get_string(
     name="LOGOUT_REDIRECT_URL",
     default="/",
@@ -356,17 +356,26 @@ SOCIAL_AUTH_LOGOUT_REDIRECT_URL = get_string(
 AUTH_USER_MODEL = "accounts.User"
 SOCIAL_AUTH_PROTECTED_USER_FIELDS = ['username']
 
-SOCIAL_AUTH_PIPELINE = (
+SOCIAL_AUTH_ODL_OIDC_PIPELINE = (
+    'social_core.pipeline.debug'
     'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.debug',
     'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.debug',
     'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.debug',
     'social_core.pipeline.user.get_username',
+    'social_core.pipeline.debug',
     'social_core.pipeline.social_auth.associate_by_email',
+    'social_core.pipeline.debug',
     'social_core.pipeline.user.create_user',
+    'social_core.pipeline.debug',
     'social_core.pipeline.social_auth.associate_user',
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.user.user_details',
 )
+
+RAISE_EXCEPTIONS = True
 
 SOCIAL_AUTH_ODL_OIDC_OIDC_ENDPOINT = get_string(
     name="SOCIAL_AUTH_ODL_OIDC_OIDC_ENDPOINT",
