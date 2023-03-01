@@ -26,7 +26,8 @@ urlpatterns = [
     path('status/', include('server_status.urls')),
     path("robots.txt", include("robots.urls")),
     
-    path('', include('social_django.urls', namespace='social'))
+    path('', include('social_django.urls', namespace='social')),
+    path('', index, name='main-index'),
 
 ]
 

@@ -4,8 +4,8 @@
 {% block title %}{% trans "sso-django-prototype" %}{% endblock %}
 
 {% block content %}
-<h1>{% trans "Hi, I'm sso-django-prototype" %}</h1>
+<h1>Hi {{ name }}, I'm sso-django-prototype</h1>
 <div id="container"></div>
-{% load render_bundle %}
-{% render_bundle 'root' %}
+{% comment %} {% load render_bundle %}
+{% render_bundle 'root' %} {% endcomment %}
 {% endblock %}

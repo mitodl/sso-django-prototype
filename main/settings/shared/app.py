@@ -17,6 +17,8 @@ from mitol.common.envs import (
 )
 from main.sentry import init_sentry
 
+from urllib.parse import urlparse
+
 VERSION = "0.0.0"
 
 import_settings_modules(
@@ -124,12 +126,12 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'server_status',
-    "social_django",
     # django-robots
     "robots",
     # Put our apps after this point
     "main",
     "accounts",
+    "social_django",
 )
 
 MIDDLEWARE = (
@@ -167,6 +169,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                "social_django.context_processors.backends",
+                "social_django.context_processors.login_redirect",
             ],
         },
     },
@@ -226,10 +230,10 @@ else:
 
 # Logging configuration
 LOG_LEVEL = get_string(
-    name="MITOL_LOG_LEVEL", default="INFO", description="The log level default"
+    name="MITOL_LOG_LEVEL", default="DEBUG", description="The log level default"
 )
 DJANGO_LOG_LEVEL = get_string(
-    name="MITOL_DJANGO_LOG_LEVEL", default="INFO", description="The log level for django"
+    name="MITOL_DJANGO_LOG_LEVEL", default="DEBUG", description="The log level for django"
 )
 
 # For logging to a remote syslog host
@@ -343,30 +347,13 @@ if DEBUG:
 # Social Auth configurations - [START]
 SOCIAL_AUTH_AUTHENTICATION_BACKENDS = (
     'authentication.backends.odl_open_id_connect.OdlOpenIdConnectAuth',
-    'django.contrib.auth.backends.ModelBackend'
 )
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = "/"
-SOCIAL_AUTH_LOGIN_URL = "/signin"
-SOCIAL_AUTH_LOGIN_ERROR_URL = "/signin"
-SOCIAL_AUTH_LOGOUT_REDIRECT_URL = get_string(
-    name="LOGOUT_REDIRECT_URL",
-    default="/",
-    description="Url to redirect to after logout, typically Open edX's own logout url",
-)
-AUTH_USER_MODEL = "accounts.User"
-SOCIAL_AUTH_PROTECTED_USER_FIELDS = ['username']
+SOCIAL_AUTH_LOGIN_ERROR_URL = "error"
+SOCIAL_AUTH_ALLOWED_REDIRECT_HOSTS = [urlparse(SITE_BASE_URL).netloc]
 
-SOCIAL_AUTH_PIPELINE = (
-    'social_core.pipeline.social_auth.social_details',
-    'social_core.pipeline.social_auth.social_uid',
-    'social_core.pipeline.social_auth.social_user',
-    'social_core.pipeline.user.get_username',
-    'social_core.pipeline.social_auth.associate_by_email',
-    'social_core.pipeline.user.create_user',
-    'social_core.pipeline.social_auth.associate_user',
-    'social_core.pipeline.social_auth.load_extra_data',
-    'social_core.pipeline.user.user_details',
-)
+SOCIAL_AUTH_ODL_OIDC_USER_FIELDS = ["username", "email", "name", "password"]
+SOCIAL_AUTH_ODL_OIDC_USER_MODEL = 'accounts.User'
+AUTH_USER_MODEL = "accounts.User"
 
 SOCIAL_AUTH_ODL_OIDC_OIDC_ENDPOINT = get_string(
     name="SOCIAL_AUTH_ODL_OIDC_OIDC_ENDPOINT",
