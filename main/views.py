@@ -9,4 +9,4 @@ def index(request):
     """
     The index view.
     """
-    return render(request, "index.html", {'name' : request.user.username })
+    return render(request, "index.html")
