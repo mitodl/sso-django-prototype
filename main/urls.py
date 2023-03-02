@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls import include
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 from django.urls import path
 
 from main.views import index
@@ -26,8 +27,10 @@ urlpatterns = [
     path('status/', include('server_status.urls')),
     path("robots.txt", include("robots.urls")),
     
-    path('', include('social_django.urls', namespace='social'))
+    path('', include('social_django.urls', namespace='social')),
 
+    path("logout/", auth_views.LogoutView.as_view(), name="logout"),
+    path('', index, name="index")
 ]
 
 if settings.DEBUG:
