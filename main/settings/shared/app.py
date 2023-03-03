@@ -59,7 +59,9 @@ init_sentry(
 )
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+BASE_DIR = os.path.dirname(
+    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+)
 
 SITE_BASE_URL = get_string(
     name="SITE_BASE_URL",
@@ -116,14 +118,14 @@ SECURE_SSL_HOST = get_string(
 
 # Application definition
 INSTALLED_APPS = (
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.sites',
-    'server_status',
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "django.contrib.sites",
+    "server_status",
     "social_django",
     # django-robots
     "robots",
@@ -133,56 +135,52 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE = (
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.contrib.sites.middleware.CurrentSiteMiddleware",
-    'social_django.middleware.SocialAuthExceptionMiddleware',
+    "social_django.middleware.SocialAuthExceptionMiddleware",
 )
 
 # enable the nplusone profiler only in debug mode
 if DEBUG:
-    INSTALLED_APPS += (
-        'nplusone.ext.django',
-    )
-    MIDDLEWARE += (
-        'nplusone.ext.django.NPlusOneMiddleware',
-    )
+    INSTALLED_APPS += ("nplusone.ext.django",)
+    MIDDLEWARE += ("nplusone.ext.django.NPlusOneMiddleware",)
 
-SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 
-ROOT_URLCONF = 'main.urls'
+ROOT_URLCONF = "main.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-                'social_django.context_processors.backends',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+                "social_django.context_processors.backends",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'main.wsgi.application'
+WSGI_APPLICATION = "main.wsgi.application"
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
@@ -202,11 +200,9 @@ ROBOTS_CACHE_TIMEOUT = get_int(
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 # Serve static files with dj-static
-STATIC_URL = '/static/'
-STATIC_ROOT = 'staticfiles'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+STATIC_URL = "/static/"
+STATIC_ROOT = "staticfiles"
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
 # Important to define this so DEBUG works properly
 INTERNAL_IPS = (
@@ -231,7 +227,9 @@ LOG_LEVEL = get_string(
     name="MITOL_LOG_LEVEL", default="INFO", description="The log level default"
 )
 DJANGO_LOG_LEVEL = get_string(
-    name="MITOL_DJANGO_LOG_LEVEL", default="INFO", description="The log level for django"
+    name="MITOL_DJANGO_LOG_LEVEL",
+    default="INFO",
+    description="The log level for django",
 )
 
 # For logging to a remote syslog host
@@ -246,68 +244,68 @@ LOG_HOST_PORT = get_int(
     description="Remote syslog server port",
 )
 
-HOSTNAME = platform.node().split('.')[0]
+HOSTNAME = platform.node().split(".")[0]
 
 # nplusone profiler logger configuration
-NPLUSONE_LOGGER = logging.getLogger('nplusone')
+NPLUSONE_LOGGER = logging.getLogger("nplusone")
 NPLUSONE_LOG_LEVEL = logging.ERROR
 
 LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse',
+    "version": 1,
+    "disable_existing_loggers": False,
+    "filters": {
+        "require_debug_false": {
+            "()": "django.utils.log.RequireDebugFalse",
         }
     },
-    'formatters': {
-        'verbose': {
-            'format': (
-                '[%(asctime)s] %(levelname)s %(process)d [%(name)s] '
-                '%(filename)s:%(lineno)d - '
-                '[{hostname}] - %(message)s'
+    "formatters": {
+        "verbose": {
+            "format": (
+                "[%(asctime)s] %(levelname)s %(process)d [%(name)s] "
+                "%(filename)s:%(lineno)d - "
+                "[{hostname}] - %(message)s"
             ).format(hostname=HOSTNAME),
-            'datefmt': '%Y-%m-%d %H:%M:%S'
+            "datefmt": "%Y-%m-%d %H:%M:%S",
         }
     },
-    'handlers': {
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose'
+    "handlers": {
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
         },
-        'syslog': {
-            'level': LOG_LEVEL,
-            'class': 'logging.handlers.SysLogHandler',
-            'facility': 'local7',
-            'formatter': 'verbose',
-            'address': (LOG_HOST, LOG_HOST_PORT)
+        "syslog": {
+            "level": LOG_LEVEL,
+            "class": "logging.handlers.SysLogHandler",
+            "facility": "local7",
+            "formatter": "verbose",
+            "address": (LOG_HOST, LOG_HOST_PORT),
         },
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
+        "mail_admins": {
+            "level": "ERROR",
+            "filters": ["require_debug_false"],
+            "class": "django.utils.log.AdminEmailHandler",
         },
     },
-    'loggers': {
-        'django': {
-            'propagate': True,
-            'level': DJANGO_LOG_LEVEL,
-            'handlers': ['console', 'syslog'],
+    "loggers": {
+        "django": {
+            "propagate": True,
+            "level": DJANGO_LOG_LEVEL,
+            "handlers": ["console", "syslog"],
         },
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': DJANGO_LOG_LEVEL,
-            'propagate': True,
+        "django.request": {
+            "handlers": ["mail_admins"],
+            "level": DJANGO_LOG_LEVEL,
+            "propagate": True,
         },
-        'nplusone': {
-            'handlers': ['console'],
-            'level': 'ERROR',
-        }
+        "nplusone": {
+            "handlers": ["console"],
+            "level": "ERROR",
+        },
     },
-    'root': {
-        'handlers': ['console', 'syslog'],
-        'level': LOG_LEVEL,
+    "root": {
+        "handlers": ["console", "syslog"],
+        "level": LOG_LEVEL,
     },
 }
 
@@ -315,20 +313,18 @@ LOGGING = {
 STATUS_TOKEN = get_string(
     name="STATUS_TOKEN", default="", description="Token to access the status API."
 )
-HEALTH_CHECK = ['CELERY', 'REDIS', 'POSTGRES']
+HEALTH_CHECK = ["CELERY", "REDIS", "POSTGRES"]
 
 # django cache back-ends
 CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'LOCATION': 'local-in-memory-cache',
+    "default": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+        "LOCATION": "local-in-memory-cache",
     },
-    'redis': {
+    "redis": {
         "BACKEND": "django_redis.cache.RedisCache",
         "LOCATION": CELERY_BROKER_URL,
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient"
-        },
+        "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient"},
     },
 }
 
@@ -336,17 +332,15 @@ FEATURES = get_features()
 
 # django debug toolbar only in debug mode
 if DEBUG:
-    INSTALLED_APPS += ('debug_toolbar', )
+    INSTALLED_APPS += ("debug_toolbar",)
     # it needs to be enabled before other middlewares
-    MIDDLEWARE = (
-        'debug_toolbar.middleware.DebugToolbarMiddleware',
-    ) + MIDDLEWARE
-    
+    MIDDLEWARE = ("debug_toolbar.middleware.DebugToolbarMiddleware",) + MIDDLEWARE
+
 # Social Auth configurations - [START]
 AUTHENTICATION_BACKENDS = (
-    'authentication.backends.odl_open_id_connect.OdlOpenIdConnectAuth',
+    "authentication.backends.odl_open_id_connect.OdlOpenIdConnectAuth",
 )
-AUTH_USER_MODEL = 'accounts.User'
+AUTH_USER_MODEL = "accounts.User"
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = "/"
 SOCIAL_AUTH_LOGIN_URL = "/signin"
 SOCIAL_AUTH_LOGIN_ERROR_URL = "/error"
@@ -357,16 +351,16 @@ SOCIAL_AUTH_LOGOUT_REDIRECT_URL = get_string(
 )
 
 SOCIAL_AUTH_PIPELINE = (
-    'social_core.pipeline.social_auth.social_details',
-    'social_core.pipeline.social_auth.social_uid',
-    'social_core.pipeline.social_auth.auth_allowed',
-    'social_core.pipeline.social_auth.social_user',
+    "social_core.pipeline.social_auth.social_details",
+    "social_core.pipeline.social_auth.social_uid",
+    "social_core.pipeline.social_auth.auth_allowed",
+    "social_core.pipeline.social_auth.social_user",
     "social_core.pipeline.social_auth.associate_by_email",
-    'social_core.pipeline.user.get_username',
-    'social_core.pipeline.user.create_user',
-    'social_core.pipeline.social_auth.associate_user',
-    'social_core.pipeline.social_auth.load_extra_data',
-    'social_core.pipeline.user.user_details',
+    "social_core.pipeline.user.get_username",
+    "social_core.pipeline.user.create_user",
+    "social_core.pipeline.social_auth.associate_user",
+    "social_core.pipeline.social_auth.load_extra_data",
+    "social_core.pipeline.user.user_details",
 )
 
 SOCIAL_AUTH_ODL_OIDC_OIDC_ENDPOINT = get_string(
