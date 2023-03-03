@@ -12,5 +12,4 @@ class RootConfig(AppConfig):
     name = "main"
 
     def ready(self):
-
         envs.validate()
