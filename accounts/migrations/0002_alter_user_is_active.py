@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('accounts', '0001_initial'),
+        ("accounts", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='user',
-            name='is_active',
-            field=models.BooleanField(default=True, help_text='The user account is active'),
+            model_name="user",
+            name="is_active",
+            field=models.BooleanField(
+                default=True, help_text="The user account is active"
+            ),
         ),
     ]

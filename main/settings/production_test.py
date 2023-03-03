@@ -128,7 +128,9 @@ class TestSettings(TestCase):
         """
         generate_app_json should return a dictionary of JSON config for app.json
         """
-        from main.envs import generate_app_json  # pylint: disable=import-outside-toplevel
+        from main.envs import (
+            generate_app_json,
+        )  # pylint: disable=import-outside-toplevel
 
         with open("app.json") as app_json_file:
             app_json = json.load(app_json_file)
@@ -144,8 +146,7 @@ class TestSettings(TestCase):
         """DISABLE_SERVER_SIDE_CURSORS should be true by default"""
         settings_vars = self.patch_settings(REQUIRED_SETTINGS)
         assert (
-            settings_vars["DATABASE"]["default"]["DISABLE_SERVER_SIDE_CURSORS"]
-            is True
+            settings_vars["DATABASE"]["default"]["DISABLE_SERVER_SIDE_CURSORS"] is True
         )
 
     def test_server_side_cursors_enabled(self):
@@ -154,6 +155,5 @@ class TestSettings(TestCase):
             {**REQUIRED_SETTINGS, "DB_DISABLE_SS_CURSORS": "False"}
         )
         assert (
-            settings_vars["DATABASE"]["default"]["DISABLE_SERVER_SIDE_CURSORS"]
-            is False
+            settings_vars["DATABASE"]["default"]["DISABLE_SERVER_SIDE_CURSORS"] is False
         )
