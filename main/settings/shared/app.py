@@ -357,7 +357,6 @@ SOCIAL_AUTH_LOGOUT_REDIRECT_URL = get_string(
 )
 
 SOCIAL_AUTH_PIPELINE = (
-    'authentication.pipeline.user.sup',
     'social_core.pipeline.social_auth.social_details',
     'social_core.pipeline.social_auth.social_uid',
     'social_core.pipeline.social_auth.auth_allowed',
@@ -368,7 +367,6 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.associate_user',
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.user.user_details',
-    'authentication.pipeline.user.sup',
 )
 
 SOCIAL_AUTH_ODL_OIDC_OIDC_ENDPOINT = get_string(
