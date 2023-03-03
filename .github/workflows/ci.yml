@@ -74,6 +74,8 @@ jobs:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
           DEBUG: 'False'
           SECRET_KEY: local_unsafe_key
+          MITOL_ADMIN_EMAIL: 'example@localhost'
+          SITE_BASE_URL: http://localhost:8091
 
       - name: Upload coverage to CodeCov
         uses: codecov/codecov-action@v1
