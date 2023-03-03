@@ -1,7 +1,9 @@
 """
 Django app
 """
+
 from django.apps import AppConfig
+from mitol.common import envs
 
 
 class RootConfig(AppConfig):
@@ -10,6 +12,5 @@ class RootConfig(AppConfig):
     name = "main"
 
     def ready(self):
-        from mitol.common import envs
 
         envs.validate()
