@@ -1,7 +1,6 @@
 """
 Test end to end django views.
 """
-import json
 
 from django.urls import reverse
 import pytest
