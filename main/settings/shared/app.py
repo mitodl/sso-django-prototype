@@ -141,6 +141,7 @@ MIDDLEWARE = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "django.contrib.sites.middleware.CurrentSiteMiddleware",
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 )
 
 # enable the nplusone profiler only in debug mode
@@ -167,6 +168,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
             ],
         },
     },
@@ -341,10 +343,10 @@ if DEBUG:
     ) + MIDDLEWARE
     
 # Social Auth configurations - [START]
-SOCIAL_AUTH_AUTHENTICATION_BACKENDS = (
+AUTHENTICATION_BACKENDS = (
     'authentication.backends.odl_open_id_connect.OdlOpenIdConnectAuth',
-    'django.contrib.auth.backends.ModelBackend'
 )
+AUTH_USER_MODEL = 'accounts.User'
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = "/"
 SOCIAL_AUTH_LOGIN_URL = "/signin"
 SOCIAL_AUTH_LOGIN_ERROR_URL = "/error"
@@ -353,29 +355,21 @@ SOCIAL_AUTH_LOGOUT_REDIRECT_URL = get_string(
     default="/",
     description="Url to redirect to after logout, typically Open edX's own logout url",
 )
-AUTH_USER_MODEL = "accounts.User"
-SOCIAL_AUTH_PROTECTED_USER_FIELDS = ['username']
 
-SOCIAL_AUTH_ODL_OIDC_PIPELINE = (
-    'social_core.pipeline.debug'
+SOCIAL_AUTH_PIPELINE = (
+    'authentication.pipeline.user.sup',
     'social_core.pipeline.social_auth.social_details',
-    'social_core.pipeline.debug',
     'social_core.pipeline.social_auth.social_uid',
-    'social_core.pipeline.debug',
+    'social_core.pipeline.social_auth.auth_allowed',
     'social_core.pipeline.social_auth.social_user',
-    'social_core.pipeline.debug',
+    "social_core.pipeline.social_auth.associate_by_email",
     'social_core.pipeline.user.get_username',
-    'social_core.pipeline.debug',
-    'social_core.pipeline.social_auth.associate_by_email',
-    'social_core.pipeline.debug',
     'social_core.pipeline.user.create_user',
-    'social_core.pipeline.debug',
     'social_core.pipeline.social_auth.associate_user',
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.user.user_details',
+    'authentication.pipeline.user.sup',
 )
-
-RAISE_EXCEPTIONS = True
 
 SOCIAL_AUTH_ODL_OIDC_OIDC_ENDPOINT = get_string(
     name="SOCIAL_AUTH_ODL_OIDC_OIDC_ENDPOINT",
@@ -393,5 +387,23 @@ SOCIAL_AUTH_ODL_OIDC_SECRET = get_string(
     name="SOCIAL_AUTH_ODL_OIDC_SECRET",
     default=None,
     description="The client secret provided by the OpenID Connect provider.",
+)
+
+USERINFO_URL = get_string(
+    name="USERINFO_URL",
+    default=None,
+    description="Provder endpoint where client sends requests for identity claims.",
+)
+
+ACCESS_TOKEN_URL = get_string(
+    name="ACCESS_TOKEN_URL",
+    default=None,
+    description="Provider endpoint where client exchanges the authorization code for tokens.",
+)
+
+AUTHORIZATION_URL = get_string(
+    name="AUTHORIZATION_URL",
+    default=None,
+    description="Provider endpoint where the user is asked to authenticate.",
 )
 # Social Auth configurations - [END]
