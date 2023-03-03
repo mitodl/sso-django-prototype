@@ -371,13 +371,13 @@ SOCIAL_AUTH_ODL_OIDC_OIDC_ENDPOINT = get_string(
 
 SOCIAL_AUTH_ODL_OIDC_KEY = get_string(
     name="SOCIAL_AUTH_ODL_OIDC_KEY",
-    default=None,
+    default="some available client id",
     description="The client ID provided by the OpenID Connect provider.",
 )
 
 SOCIAL_AUTH_ODL_OIDC_SECRET = get_string(
     name="SOCIAL_AUTH_ODL_OIDC_SECRET",
-    default=None,
+    default="some super secret key",
     description="The client secret provided by the OpenID Connect provider.",
 )
 
