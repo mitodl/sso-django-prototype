@@ -118,7 +118,7 @@ services:
         context: ./keycloak
         args:
           KEYCLOAK_THEME_GIT_REF: ${KEYCLOAK_THEME_GIT_REF:-main}
-      command: start-dev
+      command: start-dev --features=preview --spi-theme-static-max-age=-1 --spi-theme-cache-themes=false --spi-theme-cache-templates=false
       environment:
         DB_VENDOR: POSTGRES
         DB_ADDR: db
