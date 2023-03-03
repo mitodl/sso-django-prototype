@@ -5,7 +5,7 @@ x-environment:
   CELERY_TASK_ALWAYS_EAGER: 'False'
   DATABASE_URL: postgres://postgres@db:5432/postgres
   DB_DISABLE_SSL: 'True'
-  DEBUG: 'False'
+  DEBUG: ${DEBUG:-False}
   DOCKER_HOST: ${DOCKER_HOST:-missing}
   ELASTICSEARCH_URL: elastic:9200
   MITOL_DIGITAL_CREDENTIALS_HMAC_SECRET: test-hmac-secret
@@ -21,6 +21,8 @@ services:
     image: postgres:11.6
     ports:
       - "5432"
+    volumes:
+      - ./postgres/create-keycloak-db.sql:/docker-entrypoint-initdb.d/create-keycloak-db.sql
 
   redis:
     image: redis:5.0.5
@@ -110,6 +112,26 @@ services:
       - db
       - redis
     profiles: ["notebook"]
+  
+  keycloak:
+      build:
+        context: ./keycloak
+        args:
+          KEYCLOAK_THEME_GIT_REF: ${KEYCLOAK_THEME_GIT_REF:-main}
+      command: start-dev
+      environment:
+        DB_VENDOR: POSTGRES
+        DB_ADDR: db
+        DB_DATABASE: keycloak
+        DB_USER: keycloak
+        DB_SCHEMA: public
+        DB_PASSWORD: keycloak
+        KEYCLOAK_ADMIN: admin
+        KEYCLOAK_ADMIN_PASSWORD: Pa55w0rd
+      ports:
+        - 8080:8080
+      depends_on:
+        - db
 
 volumes:
   django_media: {}
