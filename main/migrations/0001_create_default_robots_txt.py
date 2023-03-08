@@ -28,7 +28,6 @@ def create_default_robots_txt(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("sites", "0002_alter_domain_unique"), ("robots", "0001_initial")]
 
     operations = [

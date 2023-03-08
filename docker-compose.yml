@@ -5,7 +5,7 @@ x-environment:
   CELERY_TASK_ALWAYS_EAGER: 'False'
   DATABASE_URL: postgres://postgres@db:5432/postgres
   DB_DISABLE_SSL: 'True'
-  DEBUG: 'False'
+  DEBUG: ${DEBUG:-False}
   DOCKER_HOST: ${DOCKER_HOST:-missing}
   ELASTICSEARCH_URL: elastic:9200
   MITOL_DIGITAL_CREDENTIALS_HMAC_SECRET: test-hmac-secret

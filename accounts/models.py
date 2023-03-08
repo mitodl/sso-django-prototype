@@ -1,6 +1,10 @@
 """Models for users"""
 from django.db import models, transaction
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth.models import (
+    AbstractBaseUser,
+    BaseUserManager,
+    PermissionsMixin,
+)
 
 from mitol.common.models import TimestampedModel
 
@@ -60,7 +64,7 @@ class User(AbstractBaseUser, TimestampedModel, PermissionsMixin):
         default=False, help_text="The user can access the admin site"
     )
     is_active = models.BooleanField(
-        default=False, help_text="The user account is active"
+        default=True, help_text="The user account is active"
     )
 
     objects = UserManager()
