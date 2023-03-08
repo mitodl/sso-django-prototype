@@ -1,0 +1,232 @@
+{
+  "addons": [
+    "heroku-postgresql:hobby-dev",
+    "newrelic:wayne",
+    "rediscloud:30"
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-apt"
+    },
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-nodejs"
+    },
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-python"
+    },
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-pgbouncer"
+    },
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-nginx"
+    }
+  ],
+  "description": "",
+  "env": {
+    "ACCESS_TOKEN_URL": {
+      "description": "Provider endpoint where client exchanges the authorization code for tokens.",
+      "required": false
+    },
+    "AUTHORIZATION_URL": {
+      "description": "Provider endpoint where the user is asked to authenticate.",
+      "required": false
+    },
+    "AWS_ACCESS_KEY_ID": {
+      "description": "AWS Access Key for S3 storage.",
+      "required": false
+    },
+    "AWS_QUERYSTRING_AUTH": {
+      "description": "Enables querystring auth for S3 urls",
+      "required": false
+    },
+    "AWS_S3_FILE_OVERWRITE": {
+      "description": "Django Storages setting. By default files with the same name will overwrite each other. Set this to False to have extra characters appended.",
+      "required": false
+    },
+    "AWS_SECRET_ACCESS_KEY": {
+      "description": "AWS Secret Key for S3 storage.",
+      "required": false
+    },
+    "AWS_STORAGE_BUCKET_NAME": {
+      "description": "S3 Bucket name.",
+      "required": false
+    },
+    "CELERY_BROKER_URL": {
+      "description": "Where celery should get tasks, default is Redis URL",
+      "required": false
+    },
+    "CELERY_RESULT_BACKEND": {
+      "description": "Where celery should put task results, default is Redis URL",
+      "required": false
+    },
+    "CELERY_TASK_EAGER_PROPAGATES": {
+      "description": "Early executed tasks propagate exceptions",
+      "required": false
+    },
+    "CORS_ALLOWED_ORIGINS": {
+      "description": "Comma separated string of trusted domains that should be allowed for CORS",
+      "required": false
+    },
+    "CORS_ALLOW_CREDENTIALS": {
+      "description": "Allow cookies to be sent in cross-site HTTP requests",
+      "required": false
+    },
+    "CSRF_TRUSTED_ORIGINS": {
+      "description": "Comma separated string of trusted domains that should be CSRF exempt",
+      "required": false
+    },
+    "DATABASE_CONN_MAX_AGE": {
+      "description": "Maximum age of connection to Postgres in seconds",
+      "required": false
+    },
+    "DATABASE_DISABLE_SERVER_SIDE_CURSORS": {
+      "description": "Disables Postgres server side cursors",
+      "required": false
+    },
+    "DB_CONN_MAX_AGE": {
+      "value": "0"
+    },
+    "DB_DISABLE_SSL": {
+      "description": "Disables SSL to postgres if set to True",
+      "required": false,
+      "value": "true"
+    },
+    "ENVIRONMENT": {
+      "description": "The execution environment that the app is in (e.g. dev, staging, prod)",
+      "required": true
+    },
+    "HEROKU_APP_NAME": {
+      "description": "The name of the review app",
+      "required": false
+    },
+    "HOST_IP": {
+      "description": "This server's host IP",
+      "required": false
+    },
+    "LOGOUT_REDIRECT_URL": {
+      "description": "Url to redirect to after logout, typically Open edX's own logout url",
+      "required": false
+    },
+    "LOG_HOST": {
+      "description": "Remote syslog server hostname",
+      "required": false
+    },
+    "LOG_HOST_PORT": {
+      "description": "Remote syslog server port",
+      "required": false
+    },
+    "MEDIA_ROOT": {
+      "description": "The root directory for locally stored media. Typically not used.",
+      "required": false
+    },
+    "MITOL_ADMIN_EMAIL": {
+      "description": "E-mail to send 500 reports to.",
+      "required": true
+    },
+    "MITOL_DJANGO_LOG_LEVEL": {
+      "description": "The log level for django",
+      "required": false
+    },
+    "MITOL_LOG_LEVEL": {
+      "description": "The log level default",
+      "required": false,
+      "value": "INFO"
+    },
+    "MITOL_SUPPORT_EMAIL": {
+      "description": "Email address listed for customer support"
+    },
+    "NEW_RELIC_APP_NAME": {
+      "description": "Application identifier in New Relic."
+    },
+    "NODE_MODULES_CACHE": {
+      "description": "If false, disables the node_modules cache to fix yarn install",
+      "value": "false"
+    },
+    "PGBOUNCER_DEFAULT_POOL_SIZE": {
+      "value": "50"
+    },
+    "PGBOUNCER_MIN_POOL_SIZE": {
+      "value": "5"
+    },
+    "REDISCLOUD_URL": {
+      "description": "RedisCloud connection url",
+      "required": false
+    },
+    "REDIS_URL": {
+      "description": "Redis URL for non-production use",
+      "required": false
+    },
+    "ROBOTS_CACHE_TIMEOUT": {
+      "description": "How long the robots.txt file should be cached",
+      "required": false
+    },
+    "SECRET_KEY": {
+      "description": "Django secret key.",
+      "generator": "secret",
+      "required": true
+    },
+    "SECURE_SSL_HOST": {
+      "description": "Hostname to redirect non-secure requests to. Overrides value from HOST header.",
+      "required": false
+    },
+    "SECURE_SSL_REDIRECT": {
+      "description": "Application-level SSL redirect setting.",
+      "required": false,
+      "value": "True"
+    },
+    "SENTRY_DSN": {
+      "description": "The connection settings for Sentry",
+      "required": false
+    },
+    "SENTRY_LOG_LEVEL": {
+      "description": "The log level for Sentry",
+      "required": false
+    },
+    "SITE_BASE_URL": {
+      "description": "Base url for the application in the format PROTOCOL://HOSTNAME[:PORT]",
+      "required": true
+    },
+    "SITE_ID": {
+      "description": "The default site id for django sites framework",
+      "required": false
+    },
+    "SOCIAL_AUTH_ODL_OIDC_KEY": {
+      "description": "The client ID provided by the OpenID Connect provider.",
+      "required": false
+    },
+    "SOCIAL_AUTH_ODL_OIDC_OIDC_ENDPOINT": {
+      "description": "The base URI for OpenID Connect discovery, https://<OIDC_ENDPOINT>/ without .well-known/openid-configuration.",
+      "required": false
+    },
+    "SOCIAL_AUTH_ODL_OIDC_SECRET": {
+      "description": "The client secret provided by the OpenID Connect provider.",
+      "required": false
+    },
+    "STATUS_TOKEN": {
+      "description": "Token to access the status API.",
+      "required": false
+    },
+    "STORAGE_USE_S3": {
+      "description": "Use S3 for storage backend (required on Heroku)",
+      "required": false,
+      "value": "True"
+    },
+    "USERINFO_URL": {
+      "description": "Provder endpoint where client sends requests for identity claims.",
+      "required": false
+    }
+  },
+  "keywords": [
+    "Django",
+    "Python",
+    "MIT",
+    "Office of Digital Learning"
+  ],
+  "name": "sso-django-prototype",
+  "repository": "https://github.com/mitodl/sso-django-prototype",
+  "scripts": {
+    "postdeploy": "./manage.py migrate --noinput"
+  },
+  "success_url": "/",
+  "website": "https://github.com/mitodl/sso-django-prototype"
+}

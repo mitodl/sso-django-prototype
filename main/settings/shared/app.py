@@ -132,6 +132,7 @@ INSTALLED_APPS = (
     # Put our apps after this point
     "main",
     "accounts",
+    "mitol.common.apps.CommonApp",
 )
 
 MIDDLEWARE = (
