@@ -21,6 +21,8 @@ services:
     image: postgres:11.6
     ports:
       - "5432"
+    volumes:
+      - ./postgres/create-keycloak-db.sql:/docker-entrypoint-initdb.d/create-keycloak-db.sql
 
   redis:
     image: redis:5.0.5
@@ -110,6 +112,26 @@ services:
       - db
       - redis
     profiles: ["notebook"]
+  
+  keycloak:
+      build:
+        context: ./keycloak
+        args:
+          KEYCLOAK_THEME_GIT_REF: ${KEYCLOAK_THEME_GIT_REF:-main}
+      command: start-dev --features=preview --spi-theme-static-max-age=-1 --spi-theme-cache-themes=false --spi-theme-cache-templates=false
+      environment:
+        DB_VENDOR: POSTGRES
+        DB_ADDR: db
+        DB_DATABASE: keycloak
+        DB_USER: keycloak
+        DB_SCHEMA: public
+        DB_PASSWORD: keycloak
+        KEYCLOAK_ADMIN: admin
+        KEYCLOAK_ADMIN_PASSWORD: Pa55w0rd
+      ports:
+        - 8080:8080
+      depends_on:
+        - db
 
 volumes:
   django_media: {}
